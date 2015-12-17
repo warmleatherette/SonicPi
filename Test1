@@ -1,0 +1,66 @@
+with_bpm 60 do
+  with_fx :echo, phase: 0.4, mix: 0.7 do
+    live_loop :smp do
+      with_fx :reverb, mix: 0.7, room: 0.9 do
+        sample :loop_amen_full, rate: ring(0.4,0.3,0.5,0.4).tick, attack: 2, release: 2, amp: (rrand 0.1, 0.3), cutoff: (rrand 50, 130)
+        sleep 5
+      end
+    end
+
+
+    live_loop :amb do
+      with_fx :reverb, mix: 0.7, room: 0.6 do
+        with_fx :bitcrusher, mix: 0.75, bits: 8 do
+          sample :ambi_drone, rate: ring(0.4, 0.5, 0.6, 0.3, 0.2, 0.1, 0.7, 0.8).tick, attack: 2, release: 2, amp: (rrand 0.2, 1)
+          sleep 10
+        end
+      end
+    end
+
+    live_loop :amb2 do
+      with_fx :reverb, mix: 0.7, room: 0.8 do
+        with_fx :bitcrusher, mix: 0.75, sample_rate: 10000, bits: 6 do
+          sample :ambi_choir, rate: ring(0.7, 0.4, 0.8, 0.3).tick, attack: 2, release: 3, cutoff: (rrand 50, 130), amp: (rrand 0.2, 1)
+          sleep 4
+        end
+      end
+    end
+
+    live_loop :mel do
+      use_synth :mod_fm
+      with_fx :echo, phase: 0.333, mix: 0.3 do
+        with_fx :bitcrusher, mix: 0.75, sample_rate: 10000, bits: 8 do
+          tmfm = (rrand -1, 1)
+          with_fx :pan, pan: tmfm do
+            play (scale(:Db6, :zhi, num_octaves: 3)).choose, mod_wave: 1, mod_phase: (rrand 0.1, 0.5), mod_range: 5, mod_pulse_width: (rrand 0.1, 0.9), release: (rrand 0.05, 0.2), amp: (rrand 0.01, 0.03), cutoff: (rrand 100, 130)
+            sleep (rrand 0.05, 0.2)
+          end
+        end
+      end
+    end
+
+
+    live_loop :amb do
+      with_fx :reverb do
+        with_fx :bitcrusher, mix: 0.75, sample_rate: 1000, bits: 8 do
+          with_fx :echo, phase: 0.5, mix: 0.6 do
+            tm = (rrand -1, 1)
+            with_fx :pan, pan: tm do
+              sample :ambi_glass_rub, rate: ring(0.6, 0.3, 0.6, 0.5, 0.2, 0.3, 0.1, 0.8).tick, attack: 4, release: 3, amp: (rrand 0.05, 0.2)
+              sleep 7
+            end
+          end
+        end
+      end
+    end
+  end
+
+  live_loop :drm do
+    with_fx :reverb, room: 1 do
+      with_fx :compressor, threshold: 0.2, clamp_time: 0.01, slope_above: 1, slope_below: 5 do
+        sample :bd_boom, amp: 2
+        sleep 15
+      end
+    end
+  end
+end
