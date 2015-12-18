@@ -1,32 +1,55 @@
-with_fx :reverb, mix: 0.6, room: 1 do
-  with_fx :echo, phase: 1, decay: 5, max_phase: 4 do
-    with_fx :echo, phase: 1, decay: 2, max_phase: 2 do
-      live_loop :fm1 do
-        use_synth :fm
-        n1  = (ring 40, 50, 35, 60, 57)
-        div1 = (rrand_i 1, 6)
-        dep1 = (rrand_i 7, 12)
-        rs1 = (rrand_i 2, 10)
-        print rs1
-        play n1.tick , release: rs1, divisor: div1, depth: dep1
-        sleep rs1
+live_loop :sine1 do
+  use_synth :sine
+  with_fx :reverb, mix: 0.8, room: 1 do
+    with_fx :echo, phase:  rrand(1, 8), decay: rrand(1, 8), max_phase: rrand(1,6), mix: rrand(0,1) do
+      with_fx :echo, phase:  rrand(1, 8), decay: rrand(1, 8), max_phase: rrand(1,6), mix: rrand(0,1) do
+        with_fx :ring_mod, freq: rrand(30, 130) do
+          with_fx :pan, pan: rrand( -1, 1) do
+            n3 = (ring 50, 60, 65, 70, 87)
+            rs3 = (rrand_i 2, 15)
+            atk3 = (rrand_i 2, 8)
+            play n3.tick, attack: atk3, release: rs3, amp: (rrand 0.0, 1)
+            sleep rs3
+          end
+        end
       end
     end
   end
 end
-
-with_fx :reverb, mix: 0.8, room: 1 do
-  with_fx :echo, phase: 4, decay: 5, max_phase: 6 do
-    with_fx :echo, phase: 3, decay: 2, max_phase: 2 do
-      live_loop :fm2 do
-        use_synth :fm
-        n2  = (ring 30, 40, 25, 50, 47)
-        div2 = (rrand_i 1, 10)
-        dep2 = (rrand_i 11, 20)
-        rs2 = (rrand_i 2, 6)
-        print rs2
-        play n2.tick , release: rs2, divisor: div2, depth: dep2
-        sleep rs2
+sleep rrand(0, 6)
+live_loop :sine2  do
+  use_synth :sine
+  with_fx :reverb, mix: 0.8, room: 1 do
+    with_fx :echo, phase:  rrand(1, 8), decay: rrand(1, 8), max_phase: rrand(1,6), mix: rrand(0,1) do
+      with_fx :echo, phase:  rrand(1, 8), decay: rrand(1, 8), max_phase: rrand(1,6), mix: rrand(0,1) do
+        with_fx :ring_mod, freq: rrand(30, 130) do
+          with_fx :pan, pan: rrand( -1, 1) do
+            n4 = (ring 62, 72, 77, 82, 99)
+            rs4 = (rrand_i 2, 15)
+            atk4 = (rrand_i 2, 8)
+            play n4.tick, attack: atk4, release: rs4, amp: (rrand 0.0, 1)
+            sleep rs4
+          end
+        end
+      end
+    end
+  end
+end
+sleep rrand(0, 6)
+live_loop :sine3  do
+  use_synth :sine
+  with_fx :reverb, mix: 0.8, room: 1 do
+    with_fx :echo, phase:  rrand(1, 8), decay: rrand(1, 8), max_phase: rrand(1,6), mix: rrand(0,1) do
+      with_fx :echo, phase:  rrand(1, 8), decay: rrand(1, 8), max_phase: rrand(1,6), mix: rrand(0,1) do
+        with_fx :ring_mod, freq: rrand(30, 130) do
+          with_fx :pan, pan: rrand( -1, 1) do
+            n5 = (ring 38, 48, 53, 58, 75)
+            rs5 = (rrand_i 2, 15)
+            atk5 = (rrand_i 2, 8)
+            play n5.tick, attack: atk5, release: rs5, amp: (rrand 0.0, 1)
+            sleep rs5
+          end
+        end
       end
     end
   end
