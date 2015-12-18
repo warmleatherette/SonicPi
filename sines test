@@ -1,0 +1,27 @@
+live_loop :sine1 do
+  use_synth :sine
+  with_fx :reverb, mix: 0.8, room: 1 do
+    with_fx :echo, phase: rrand(1, 8), decay: rrand(1, 8), max_phase: rrand(1,6), mix: rrand(0,1) do
+      with_fx :echo, phase: rrand(1, 8), decay: rrand(1, 8), max_phase: rrand(1,6), mix: rrand(0,1) do
+        with_fx :ring_mod, freq: rrand(30, 130) do
+          with_fx :pan, pan: rrand( -1, 1) do
+            n3 = (rrand 40, 64)
+            rs3 = (rrand 2, 15)
+            atk3 = (rrand 2, 8)
+            pt = (rrand -12, 24)
+            play n3/2, attack: atk3, release: rs3, amp: (rrand 0.0, 1), cutoff: (rrand 50, 130), res: (rrand 0,1)
+            sleep rs3 /3
+            with_fx :pitch_shift, pitch: pt*-1 do
+              play n3, attack: atk3/2, release: rs3/3*1.25, amp: (rrand 0.0, 1), cutoff: (rrand 50, 130), res: (rrand 0,1)
+              sleep rs3 /4
+              with_fx :pitch_shift, pitch: pt/3.5 do
+                play n3 + n3, attack: atk3/3, release: rs3/2*1.25, amp: (rrand 0.0, 1), cutoff: (rrand 50, 130), res: (rrand 0,1)
+                sleep rs3
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end
