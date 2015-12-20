@@ -1,0 +1,58 @@
+live_loop :new2 do
+  with_fx :echo, phase: 2, decay: 6 do
+    with_fx :reverb, mix: 0.9, room: 1 do
+      live_loop :fm do
+        notes = (ring 50, 51, 52, 53, 55, 58).choose
+        with_fx :ring_mod, freq: notes/2 do
+          use_synth :fm
+          atk1 = (rrand_i 1, 5)
+          print atk1
+          slp1 =  (rrand_i 6, 10)
+          print slp1
+          play notes, attack: atk1, release: slp1-atk1
+          sleep slp1
+        end
+      end
+      sleep (rrand_i 1, 5)
+      live_loop :fm2 do
+        notes2 = (ring 60, 61, 62, 63, 65, 68).choose
+        with_fx :ring_mod, freq: notes2/2 do
+          use_synth :fm
+          atk2 = (rrand_i 1, 5)
+          print atk2
+          slp2 =  (rrand_i 6, 10)
+          print slp2
+          play notes2, attack: atk2, release: slp2-atk2
+          sleep slp2
+        end
+      end
+      sleep (rrand_i 1, 7)
+      live_loop :fm3 do
+        notes3 = (ring 70, 71, 72, 73, 75, 78).choose
+        with_fx :ring_mod, freq: notes3/2 do
+          use_synth :fm
+          atk3 = (rrand_i 1, 5)
+          print atk3
+          slp3 =  (rrand_i 6, 10)
+          print slp3
+          play notes3, attack: atk3, release: slp3-atk3
+          sleep slp3
+        end
+      end
+      sleep 15
+      with_fx :echo do
+        x = rrand(1, 6)
+        with_fx :panslicer, phase: 2, pan_min: -1, pan_max: 1, wave: 3,  smooth: 4 do
+          with_fx :pitch_shift, window_size: 0.5, pitch_dis: 3, time_dis: 5 do
+            x.times do
+              use_synth :sine
+              notes4 = (ring 90, 91, 92, 93, 95, 98, 103, 121).choose
+              play notes4, attack: 3, release: 7, amp: 0.5
+              sleep (rrand_i 3, 6)
+            end
+          end
+        end
+      end
+    end
+  end
+end
