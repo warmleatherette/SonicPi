@@ -1,0 +1,23 @@
+live_loop :whine do
+  with_fx :reverb, mix: 0.7 do
+    with_fx :echo, phase: 2, decay: 5, mix: 0.9 do
+      with_fx :wobble, phase: 0.25, cutoff_min: :Ab1, cutoff_max: :B2, wave: 3 do
+        use_synth :fm
+        play :a1, attack: 6, sustain: 6, release: 8, divisor: 2, depth: 7
+        sleep 20
+      end
+    end
+  end
+end
+
+live_loop :whine2 do
+  with_fx :reverb, mix: 0.7 do
+    with_fx :echo, phase: 2, decay: 5, mix: 0.9 do
+      with_fx :wobble, phase: 0.25, cutoff_min: :Ab2, cutoff_max: :C2, wave: 3 do
+        use_synth :hoover
+        play :a2, attack: 6, sustain: 6, release: 8
+        sleep 20
+      end
+    end
+  end
+end
